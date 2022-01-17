@@ -14,20 +14,20 @@ defmodule ConnectToJavaSocket.CLI do
 
     case parse do
       {_, [port, host], _} ->
-        [port |> String.to_integer(), host]
+        {port |> String.to_integer(), host}
 
       {_, [port], _} ->
-        [port |> String.to_integer(), @default_host]
+        {port |> String.to_integer(), @default_host}
 
       _ ->
-        [@default_port, @default_host]
+        {@default_port, @default_host}
     end
   end
 
-  defp process([port, host]) do
-    sock = Socket.TCP.connect!(host, port, packet: :line)
+  defp process({port, host}) do
+    socket = Socket.TCP.connect!(host, port, packet: :line)
     Logger.info("Connected")
-    log_indefinetly(sock)
+    log_indefinetly(socket)
   end
 
   defp log_indefinetly(socket) do
