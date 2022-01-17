@@ -33,6 +33,7 @@ defmodule ConnectToJavaSocket.CLI do
   defp log_indefinetly(socket) do
     socket
     |> Socket.Stream.recv!()
+    |> String.trim()
     |> Logger.info()
 
     log_indefinetly(socket)
