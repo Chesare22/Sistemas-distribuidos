@@ -14,10 +14,10 @@ defmodule ConnectToJavaSocket.CLI do
 
     case parse do
       {_, [port, host], _} ->
-        [port, host]
+        [port |> String.to_integer(), host]
 
       {_, [port], _} ->
-        [port, @default_host]
+        [port |> String.to_integer(), @default_host]
 
       _ ->
         [@default_port, @default_host]
