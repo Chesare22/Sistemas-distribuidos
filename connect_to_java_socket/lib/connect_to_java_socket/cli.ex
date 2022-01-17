@@ -3,7 +3,7 @@ defmodule ConnectToJavaSocket.CLI do
   @default_port 4444
   require Logger
 
-  def run(argv) do
+  def main(argv) do
     argv
     |> parse_args
     |> process

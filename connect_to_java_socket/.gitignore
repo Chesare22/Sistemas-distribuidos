@@ -24,3 +24,6 @@ connect_to_java_socket-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Output of `mix escript.build`
+/connect_to_java_socket
