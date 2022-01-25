@@ -19,7 +19,7 @@ public class ProvinceClient {
             Province mid = new Province(1, "MID", "Mérida");
             Province ens = new Province(2, "ENS", "Ensenada");
             Province cdmx = new Province(3, "CDMX", "Ciudad de México");
-            Province cam = new Province(4, "CAM", "Campeches"); //w
+            Province cam = new Province(4, "CAM", "Ciudad de Campeches"); //w
             Province mty = new Province(5, "MTY", "Monterrey");
 
             //Save province
@@ -32,7 +32,7 @@ public class ProvinceClient {
 
             //Update province
             System.out.println("Update Campeches to Campeche");
-            Province updatedCAM = new Province(4, "CAM", "Campeche");
+            Province updatedCAM = new Province(4, "CAM", "Ciudad de Campeche");
             int iRet = rp.update(updatedCAM);
 
             //Display all provinces
@@ -47,8 +47,8 @@ public class ProvinceClient {
             rp.delete(cam);
 
             //Display province starts by "C"
-            System.out.println("Display province starts by \"C\"");
-            arrProv = rp.findByName("C");
+            System.out.println("Display province starts by \"Ciu\"");
+            arrProv = rp.findByName("Ciu");
             for (Province p : arrProv) {
                 System.out.println(p.toString());
             }
