@@ -1,18 +1,20 @@
 import java.sql.*;
+
 /**
  * DBManager: Singleton pattern
- *
- *
  **/
 public final class DBManager {
     private static DBManager _instance = null;
     private Connection _con = null;
+
     public DBManager() {
-//Connect to Ms Access
+        //Connect to Ms Access
         _con = getMsAccessConnection();
-//Connect to MySQL
-//_con = getMySQLConnection();
+
+        //Connect to MySQL
+        //_con = getMySQLConnection();
     }
+
     //Thread safe instatiate method
     public static synchronized DBManager getInstance() {
         if (_instance == null) {
@@ -20,14 +22,17 @@ public final class DBManager {
         }
         return _instance;
     }
+
     public Connection getConnection() {
         return _con;
     }
+
     /**
      * Connection to SQLServer Database
      */
     private static Connection getSQLServerConnection() {
-        Connection con = null;try {
+        Connection con = null;
+        try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String URL =
                     "jdbc:sqlserver://localhost;databaseName=NID;user=sa;password=123;";
@@ -37,6 +42,7 @@ public final class DBManager {
         }
         return con;
     }
+
     /**
      * Connection to MySQL Database
      */
@@ -50,6 +56,7 @@ public final class DBManager {
         }
         return con;
     }
+
     /**
      * Connection to Microsoft Access
      */
@@ -57,12 +64,13 @@ public final class DBManager {
         Connection con = null;
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            con=DriverManager.getConnection("jdbc:ucanaccess://D:/Programacion/mars/RMIServerSide/Province.mdb");
+            con = DriverManager.getConnection("jdbc:ucanaccess://D:/Programacion/mars/RMIServerSide/Province.mdb");
         } catch (Exception se) {
             System.out.println(se);
         }
         return con;
     }
+
     private static Connection getFirebirdDBConnection() {
         Connection con = null;
         try {
@@ -71,8 +79,7 @@ public final class DBManager {
                     "SYSDBA", "masterkey");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 con.close();
             } catch (Exception e) {
