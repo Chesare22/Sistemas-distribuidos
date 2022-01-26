@@ -11,7 +11,9 @@ public class ProvinceServer {
             Registry registry = LocateRegistry.createRegistry(1099);
 
             //Instantiate server object
-            ProvinceObject po = new ProvinceObject();
+            var user = args[0];
+            var password = args[1];
+            ProvinceObject po = new ProvinceObject(user, password);
 
             //Register server object
             registry.rebind("Province", po);

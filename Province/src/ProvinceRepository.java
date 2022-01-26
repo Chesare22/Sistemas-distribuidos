@@ -5,10 +5,10 @@ import java.util.*;
  * ProvinceRepository: data accessor
  */
 public class ProvinceRepository {
-    public static int save(Province p) {
+    public static int save(Province p, String user, String password) {
         int iRet = -1;
         try {
-            Connection con = DBManager.getInstance().getConnection();
+            Connection con = DBManager.getInstance(user, password).getConnection();
             String SQL = "INSERT INTO Province (Id, ShortName, Name) values(?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, p.getId());
@@ -24,10 +24,10 @@ public class ProvinceRepository {
         return iRet;
     }
 
-    public static int update(Province p) {
+    public static int update(Province p, String user, String password) {
         int iRet = -1;
         try {
-            Connection con = DBManager.getInstance().getConnection();
+            Connection con = DBManager.getInstance(user, password).getConnection();
             String SQL = "UPDATE Province SET ShortName=?, Name=? WHERE Id=?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setString(1, p.getShortName());
@@ -43,10 +43,10 @@ public class ProvinceRepository {
         return iRet;
     }
 
-    public static int delete(Province p) {
+    public static int delete(Province p, String user, String password) {
         int iRet = -1;
         try {
-            Connection con = DBManager.getInstance().getConnection();
+            Connection con = DBManager.getInstance(user, password).getConnection();
             String SQL = "DELETE FROM Province WHERE Id=?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, p.getId());
@@ -60,8 +60,8 @@ public class ProvinceRepository {
         return iRet;
     }
 
-    public static void deleteAll() {
-        Connection con = DBManager.getInstance().getConnection();
+    public static void deleteAll(String user, String password) {
+        Connection con = DBManager.getInstance(user, password).getConnection();
         try {
             con.setAutoCommit(false);
             String SQL = "DELETE FROM Province";
@@ -81,11 +81,11 @@ public class ProvinceRepository {
         }
     }
 
-    public static ArrayList findAll() {
+    public static ArrayList findAll( String user, String password) {
         ArrayList arr = new ArrayList();
         try {
             String QRY = "SELECT * FROM Province ORDER BY Id";
-            Connection con = DBManager.getInstance().getConnection();
+            Connection con = DBManager.getInstance(user, password).getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(QRY);
             while (rs.next()) {
@@ -104,11 +104,11 @@ public class ProvinceRepository {
 
     }
 
-    public static ArrayList findByName(String name) {
+    public static ArrayList findByName(String name, String user, String password) {
         ArrayList arr = new ArrayList();
         try {
             String QRY = "SELECT * FROM Province WHERE name LIKE(?) ORDER BY id ";
-            Connection con = DBManager.getInstance().getConnection();
+            Connection con = DBManager.getInstance(user, password).getConnection();
             PreparedStatement pstmt = con.prepareStatement(QRY);
             pstmt.setString(1, "%" + name + "%");
             ResultSet rs = pstmt.executeQuery();

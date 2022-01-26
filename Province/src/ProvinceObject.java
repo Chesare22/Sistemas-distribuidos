@@ -8,9 +8,13 @@ import java.util.ArrayList;
 public class ProvinceObject extends UnicastRemoteObject implements
         IRemoteProvince {
     private static final long serialVersionUID = 11L;
+    private final String user;
+    private final String password;
 
-    public ProvinceObject() throws RemoteException {
+    public ProvinceObject(String user, String password) throws RemoteException {
         super();
+        this.user = user;
+        this.password = password;
     }
 
     public int save(Province p) {
@@ -19,7 +23,7 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        return ProvinceRepository.save(p);
+        return ProvinceRepository.save(p, user, password);
     }
 
     public int update(Province p) {
@@ -28,7 +32,7 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        return ProvinceRepository.update(p);
+        return ProvinceRepository.update(p, user, password);
     }
 
     public int delete(Province p) {
@@ -37,7 +41,7 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        return ProvinceRepository.delete(p);
+        return ProvinceRepository.delete(p, user, password);
     }
 
     public void deleteAll() {
@@ -46,7 +50,7 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        ProvinceRepository.deleteAll();
+        ProvinceRepository.deleteAll(user, password);
     }
 
     public ArrayList findAll() {
@@ -55,7 +59,7 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        return ProvinceRepository.findAll();
+        return ProvinceRepository.findAll(user, password);
     }
 
     public ArrayList findByName(String criteria) {
@@ -64,6 +68,6 @@ public class ProvinceObject extends UnicastRemoteObject implements
         } catch (ServerNotActiveException snae) {
             snae.printStackTrace();
         }
-        return ProvinceRepository.findByName(criteria);
+        return ProvinceRepository.findByName(criteria, user, password);
     }
 }

@@ -7,18 +7,18 @@ public final class DBManager {
     private static DBManager _instance = null;
     private Connection _con = null;
 
-    public DBManager() {
+    public DBManager(String user, String password) {
         //Connect to Ms Access
-        _con = getMsAccessConnection();
+        //_con = getMsAccessConnection();
 
         //Connect to MySQL
-        //_con = getMySQLConnection();
+        _con = getMySQLConnection(user, password);
     }
 
     //Thread safe instatiate method
-    public static synchronized DBManager getInstance() {
+    public static synchronized DBManager getInstance(String user, String password) {
         if (_instance == null) {
-            _instance = new DBManager();
+            _instance = new DBManager(user, password);
         }
         return _instance;
     }
@@ -46,10 +46,13 @@ public final class DBManager {
     /**
      * Connection to MySQL Database
      */
-    private static Connection getMySQLConnection() {
+    private static Connection getMySQLConnection(String user, String password) {
         Connection con = null;
         try {
-            String strCon = "jdbc:mysql://127.0.0.1/Province?user=rtuser&password=123";
+            String strCon =
+                    "jdbc:mysql://127.0.0.1/province?" +
+                            "user= " + user +
+                            "&password=" + password;
             con = DriverManager.getConnection(strCon);
         } catch (SQLException se) {
             System.out.println(se);
