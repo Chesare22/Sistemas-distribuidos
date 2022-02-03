@@ -33,7 +33,7 @@ public class ProvinceClient {
             //Update province
             System.out.println("Update Campeches to Campeche");
             Province updatedCAM = new Province(4, "CAM", "Ciudad de Campeche");
-            int iRet = rp.update(updatedCAM);
+            rp.update(updatedCAM);
 
             //Display all provinces
             System.out.println("Display all provinces");

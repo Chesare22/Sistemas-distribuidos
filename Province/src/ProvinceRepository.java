@@ -101,7 +101,6 @@ public class ProvinceRepository {
             System.out.println(se);
         }
         return arr;
-
     }
 
     public static ArrayList findByName(String name, String user, String password) {
